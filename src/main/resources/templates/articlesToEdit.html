@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ändra och skapa artiklar</title>
+</head>
+<body>
+<form th:action="@{/logout}" method="post">
+<p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+  <input type="submit">Logout</form>
+
+<table>
+  <tr th:each="user: ${listUsers}">
+    <td th:text="${user.email}"/>
+  </tr>
+</table>
+</body>
+</html>

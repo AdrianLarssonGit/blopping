@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrera ny användare</title>
+
+</head>
+<body>
+<form th:action="@{/registrera_anvandare}" th:objet="${user}" method="post">
+    <label>Email:</label>
+    <input type="text" th:field="${user.email}"/>
+    <br>
+    <label>Lösenord:</label>
+    <input type="text" th:field="${user.password}"/><br>
+    <label>Förnamn:</label>
+    <input type="text" th:field="${user.firstName}"/><br>
+    <label>Efternamn:</label>
+    <input type="text" th:field="${user.lastName}"/><br>
+<button type="submit">Skapa användare</button>
+</form>
+</body>
+</html>
