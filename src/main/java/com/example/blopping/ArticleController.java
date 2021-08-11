@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,12 +41,26 @@ public class ArticleController {
         return "home";
     }
 
-    @PostMapping("/editarticle")
-    public String articleedit(Article article, Model model){
-        System.out.println(article.getId());
-        Optional<Article> articleToEdit = articleRepo.findById(article.getId());
-        System.out.println(articleToEdit);
-        model.addAttribute("articleToEdit", articleToEdit);
+    @GetMapping("/editarticle/*")
+    public String articleedit(Model model, HttpServletRequest httpServletRequest){
+        List<Article> articles = articleRepo.findAll();
+        String pathInfo = httpServletRequest.getRequestURI();
+
+
+
+        String cleanedPath = pathInfo.replaceAll("\\D+","");
+        List<Article> finalList = new ArrayList<>();
+
+        for(int i = 0; i < articles.size(); i++){
+            System.out.println(articles);
+            if(articles.get(i).getId().toString().equals(cleanedPath)){
+                finalList.add(articles.get(i));
+            }
+        }
+
+        for(int i = 0; i < finalList.size(); i++){
+            model.addAttribute("article", finalList);
+        }
 
         return "singleArticleViewForEdit";
     }

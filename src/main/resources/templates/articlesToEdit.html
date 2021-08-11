@@ -17,8 +17,7 @@
     <tr th:each="article: ${listArticles}">
         <td th:text="${article.articleText}"/>
         <td th:text="${article.id}"/>
-        <form th:action="@{/editarticle}" th:object="${article}" method="post">
-            <input type="submit" value="Ändra denna artikel"></form>
+        <a th:href="@{/editarticle/{articleId}(articleId=${article.getId()})}">Ändra denna artikel</a>
     </tr>
 </table>
 </div>
