@@ -1,6 +1,7 @@
 package com.example.blopping;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 
 import javax.persistence.*;
@@ -16,7 +17,8 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true, unique = false, length = NVARCHAR)
+    @Column(nullable = true, unique = true)
+    @Type(type="org.hibernate.type.StringNVarcharType")
     private String articleText;
 
 

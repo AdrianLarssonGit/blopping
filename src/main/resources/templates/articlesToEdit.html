@@ -1,18 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Ändra och skapa artiklar</title>
 </head>
 <body>
-<form th:action="@{/logout}" method="post">
-<p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
-  <input type="submit">Logout</form>
+
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="post">
+        <p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+        <input type="submit">Logout</form>
+
+
 
 <table>
-  <tr th:each="user: ${listUsers}">
-    <td th:text="${user.email}"/>
-  </tr>
+    <tr th:each="article: ${listArticles}">
+        <td th:text="${article.articleText}"/>
+        <td th:text="${article.id}"/>
+        <form th:action="@{/editarticle}" th:object="${article}" method="post">
+            <input type="submit" value="Ändra denna artikel"></form>
+    </tr>
 </table>
+</div>
+<div sec:authorize="isAnonymous()">
+    <p>Hej! För att ändra artiklar så måste du logga in!</p>
+    <br>
+    <form th:action="@{/login}" method="post"><input type="submit" value="Logga in"/></form>
+</div>
 </body>
 </html>

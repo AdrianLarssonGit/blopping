@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ändra artikel </title>
+
+</head>
+<body>
+<form th:action="@{/updatearticle}" th:objet="${article}" method="post">
+  <tr th:each="article: ${listArticles}">
+    <td th:text="${article.articleText}"/>
+  </tr>
+</form>
+
+</body>
+</html>

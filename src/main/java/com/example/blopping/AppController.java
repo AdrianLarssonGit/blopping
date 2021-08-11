@@ -15,6 +15,9 @@ public class AppController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ArticleRepo articleRepo;
+
     @GetMapping("")
     public String viewHome(){
         return "home";
@@ -39,13 +42,7 @@ public class AppController {
     }
 
 
-    @GetMapping("/articles")
-    public String listedUsers(Model model){
-        List<User> listUser = userRepository.findAll();
-        model.addAttribute("listUsers", listUser);
 
-        return "articlesToEdit";
-    }
 
    /* @PostMapping("/logut")
     public String logout(){

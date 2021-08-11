@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrera ny användare</title>
+
+</head>
+<body>
+<form th:action="@{/sparaartikel}" th:objet="${article}" method="post">
+  <label>Email:</label>
+  <input type="text" th:field="${article.articleText}"/>
+  <br>
+
+  <button type="submit">Skapa artikel</button>
+</form>
+</body>
+</html>
