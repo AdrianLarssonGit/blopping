@@ -34,7 +34,7 @@ public class ArticleController{
         List<Article> listArticle = articleRepo.findAll();
         model.addAttribute("listArticles", listArticle);
 
-        return "articlesToEdit";
+        return "articlesMainList";
     }
 
     //Create new article

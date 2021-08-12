@@ -14,7 +14,7 @@
 <table>
     <tr th:each="article: ${listArticles}">
         <td th:text="${article.articleText}"/>
-        <td th:text="${article.id}"/>
+        <td type="hidden" th:field="${article.id}"/>
         <td><form th:action="@{/editarticle/{articleId}(articleId=${article.getId()})}" method="get"><button type="submit">Ändra</button></form></td>
     </tr>
 </table>
@@ -23,6 +23,12 @@
     <p>Hej! För att ändra artiklar så måste du logga in!</p>
     <br>
     <form th:action="@{/login}" method="post"><input type="submit" value="Logga in"/></form>
+
+    <table>
+        <tr th:each="article: ${listArticles}">
+            <td th:text="${article.articleText}"/>
+        </tr>
+    </table>
 </div>
 </body>
 </html>
