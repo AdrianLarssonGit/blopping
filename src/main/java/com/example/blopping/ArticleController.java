@@ -79,8 +79,6 @@ public class ArticleController{
     public String updatearticle(Article article, Model model){
         String articleId = article.getId().toString();
         String articleText = article.getArticleText();
-        //UPDATE artiklar SET article_text="00" WHERE id=5
-        //SELECT * FROM artiklar
         EntityManager session = entityManagerFactory.createEntityManager();
 
         session.createNativeQuery("UPDATE artiklar SET article_text=:articleText WHERE id=:articleId")
