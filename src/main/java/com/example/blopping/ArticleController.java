@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ import java.util.Optional;
 @Controller
 public class ArticleController{
 
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
 
     @Autowired
@@ -59,7 +63,6 @@ public class ArticleController{
         List<Article> finalList = new ArrayList<>();
 
         for(int i = 0; i < articles.size(); i++){
-            System.out.println(articles);
             if(articles.get(i).getId().toString().equals(cleanedPath)){
                 finalList.add(articles.get(i));
             }
@@ -68,16 +71,22 @@ public class ArticleController{
 
             model.addAttribute("article", finalList.get(0));
 
-        System.out.println(model);
 
         return "singleArticleViewForEdit";
     }
 
     @PostMapping("/updatearticle")
     public String updatearticle(Article article, Model model){
-        Article finishedArticle = article;
+        String articleId = article.getId().toString();
+        String articleText = article.getArticleText();
+        //UPDATE artiklar SET article_text="00" WHERE id=5
+        //SELECT * FROM artiklar
+        EntityManager session = entityManagerFactory.createEntityManager();
 
-        articleRepo.deleteById(article.getId());
+        session.createNativeQuery("UPDATE artiklar SET article_text=:articleText WHERE id=:articleId")
+                .setParameter("articleText", articleText)
+                .setParameter("articleId", articleId);
+
         articleRepo.save(article);
 
 

@@ -11,11 +11,11 @@
     <p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
     <input type="submit">Logout</form>
 
-  <form th:action="@{/sparaartikel}" th:objet="${article}" method="post">
+  <form th:action="@{/updatearticle}" th:objet="${article}" method="post">
     <label>Email:</label>
     <input type="text" th:field="${article.articleText}"/>
     <br>
-
+    <input type="text" th:field="${article.id}"/>
     <button type="submit">Skapa artikel</button>
   </form>
 

@@ -17,7 +17,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = true, unique = false)
     @Type(type="org.hibernate.type.StringNVarcharType")
     private String articleText;
 
