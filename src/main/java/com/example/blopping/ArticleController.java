@@ -30,7 +30,7 @@ public class ArticleController{
 
     //List all articles
     @GetMapping("/articles")
-    public String listedUsers(Model model){
+    public String listAllArticles(Model model){
         List<Article> listArticle = articleRepo.findAll();
         model.addAttribute("listArticles", listArticle);
 
@@ -88,7 +88,7 @@ public class ArticleController{
         articleRepo.save(article);
 
 
-        return "home";
+        return listAllArticles(model);
     }
 
 }
