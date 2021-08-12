@@ -9,15 +9,13 @@
 <div sec:authorize="isAuthenticated()">
     <form th:action="@{/logout}" method="post">
         <p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
-        <input type="submit">Logout</form>
-
-
+        <button type="submit">Logout</button></form>
 
 <table>
     <tr th:each="article: ${listArticles}">
         <td th:text="${article.articleText}"/>
         <td th:text="${article.id}"/>
-        <a th:href="@{/editarticle/{articleId}(articleId=${article.getId()})}">Ändra denna artikel</a>
+        <td><form th:action="@{/editarticle/{articleId}(articleId=${article.getId()})}" method="get"><button type="submit">Ändra</button></form></td>
     </tr>
 </table>
 </div>
