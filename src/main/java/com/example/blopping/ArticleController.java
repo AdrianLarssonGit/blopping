@@ -14,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,12 +80,37 @@ public class ArticleController{
     public String updatearticle(Article article, Model model){
         String articleId = article.getId().toString();
         String articleText = article.getArticleText();
+
+        String[] articleTextAsString = articleText.split(" ");
+        System.out.println(Arrays.toString(articleTextAsString));
+
+        for(int i = 0; i < articleTextAsString.length; i++){
+            if(articleTextAsString[i].startsWith("TITLE::")){
+                articleTextAsString[i] = "<h1><b>" + articleTextAsString[i].substring(7,articleTextAsString[i].length()-1) + "</h1></b>";
+            }
+        }
+
+        System.out.println(Arrays.toString(articleTextAsString));
+
+        String articleTextFinal = "";
+
+        for(int i = 0; i < articleTextAsString.length; i++){
+            articleTextFinal = articleTextFinal + articleTextAsString[i] + " ";
+        }
+
+        articleTextFinal = articleTextFinal.substring(0,articleTextFinal.length()-1);
+
+        System.out.println(articleTextFinal);
+
+
+
         EntityManager session = entityManagerFactory.createEntityManager();
 
         session.createNativeQuery("UPDATE artiklar SET article_text=:articleText WHERE id=:articleId")
-                .setParameter("articleText", articleText)
+                .setParameter("articleText", articleTextFinal)
                 .setParameter("articleId", articleId);
 
+        article.setArticleText(articleTextFinal);
         articleRepo.save(article);
 
 

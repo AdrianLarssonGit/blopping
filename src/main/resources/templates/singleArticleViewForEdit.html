@@ -9,17 +9,17 @@
 <div sec:authorize="isAuthenticated()">
   <form th:action="@{/logout}" method="post">
     <p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
-    <input type="submit">Logout</form>
+    <button type="submit">Logout</button></form>
 
   <form th:action="@{/updatearticle}" th:objet="${article}" method="post">
-    <label>Email:</label>
+
     <!-- <input type="text" th:field="${article.articleText}"/> -->
     <textarea class="form-control" rows="12"
               style="margin-top: 10px;"
                th:field="${article.articleText}">[[${article.articleText}]]</textarea>
     <br>
     <input type="hidden" th:field="${article.id}"/>
-    <button type="submit">Skapa artikel</button>
+    <button type="submit">Spara artikel</button>
   </form>
 
 

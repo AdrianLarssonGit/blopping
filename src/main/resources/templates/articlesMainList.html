@@ -14,7 +14,7 @@
         <p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
         <button type="submit">Logout</button></form>
 
-<table class="centered">
+<table class="centered" border="1">
     <tr th:each="article: ${listArticles}">
         <td class="article-text" style="overflow-x: hidden" th:utext="${article.articleText}"/>
         <td type="hidden" th:field="${article.id}"/>
