@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <title>Ändra och skapa artiklar</title>
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -16,7 +16,7 @@
 
 <table class="centered">
     <tr th:each="article: ${listArticles}">
-        <td class="article-text" th:utext="${article.articleText}"/>
+        <td class="article-text" style="overflow-x: hidden" th:utext="${article.articleText}"/>
         <td type="hidden" th:field="${article.id}"/>
         <td><form th:action="@{/editarticle/{articleId}(articleId=${article.getId()})}" method="get"><button type="submit">Ändra</button></form></td>
     </tr>
@@ -29,7 +29,7 @@
 
     <table class="centered">
         <tr th:each="article: ${listArticles}">
-            <td th:utext="${article.articleText}"/>
+            <td style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" th:utext="${article.articleText}"/>
         </tr>
     </table>
 </div>

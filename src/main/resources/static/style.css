@@ -1,4 +1,12 @@
+html{
+height: 100%
+overflow-y: scroll;
+}
+
+
 body {
+height: 100%
+overflow-y: scroll;
 background-color: white;
 }
 
@@ -8,9 +16,17 @@ text-color: red;
 }
 
 .centered {
+
+    word-wrap: break-word;
+    margin-right: auto;
+    margin-left: auto;
+    width: 70vw
+    }
+    /*
+ overflow-y: scroll;
   position: fixed;
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
+  /* bring your own prefixes
   transform: translate(-50%, -50%);
-}
+} */
