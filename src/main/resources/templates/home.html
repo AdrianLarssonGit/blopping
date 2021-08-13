@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>PengaWiki</title>
@@ -9,8 +9,11 @@
 
     <h1>PengaWiki</h1>
     <h3><a th:href="@{/articles}">Lista alla artiklar</a></h3>
+
+    <div sec:authorize="isAnonymous()">
     <h3><a th:href="@{/registrera}">Registrera</a></h3>
     <h3><a th:href="@{/login}">Logga in (för att ändra/lägga till artiklar)</a></h3>
+    </div>
 
 
 </body>

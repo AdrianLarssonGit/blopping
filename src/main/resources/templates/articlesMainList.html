@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ändra och skapa artiklar</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -11,9 +14,9 @@
         <p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
         <button type="submit">Logout</button></form>
 
-<table>
+<table class="centered">
     <tr th:each="article: ${listArticles}">
-        <td th:text="${article.articleText}"/>
+        <td class="article-text" th:utext="${article.articleText}"/>
         <td type="hidden" th:field="${article.id}"/>
         <td><form th:action="@{/editarticle/{articleId}(articleId=${article.getId()})}" method="get"><button type="submit">Ändra</button></form></td>
     </tr>
@@ -24,9 +27,9 @@
     <br>
     <form th:action="@{/login}" method="post"><input type="submit" value="Logga in"/></form>
 
-    <table>
+    <table class="centered">
         <tr th:each="article: ${listArticles}">
-            <td th:text="${article.articleText}"/>
+            <td th:utext="${article.articleText}"/>
         </tr>
     </table>
 </div>
