@@ -17,13 +17,16 @@
         <button type="submit">Logout</button></form>
 
 <table class="centered" border="1">
-    <tr th:each="article: ${listArticles}">
+    <tr th:if="${article.getAuthor} == ${#authentication.principal.getUsername} or ${article.privateArticle == 0}" th:each="article: ${listArticles}">
         <td class="article-text" style="overflow-x: hidden" th:utext="${article.articleText}"/>
         <td type="hidden" th:field="${article.id}"/>
         <td><form th:action="@{/editarticle/{articleId}(articleId=${article.getId()})}" method="get"><button type="submit">Ändra</button></form></td>
     </tr>
 </table>
 </div>
+
+
+
 <div sec:authorize="isAnonymous()">
     <p>Hej! För att ändra artiklar så måste du logga in!</p>
     <br>
@@ -31,7 +34,7 @@
 
     <table class="centered">
         <tr th:each="article: ${listArticles}">
-            <td style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" th:utext="${article.articleText}"/>
+            <span th:if="${article.privateArticle == 0}" td style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" th:utext="${article.articleText}"/>
         </tr>
     </table>
 </div>

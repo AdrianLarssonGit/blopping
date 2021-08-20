@@ -23,12 +23,19 @@ public class Article {
     @Column(nullable = false, unique = true, columnDefinition = "LONGTEXT")
     private String emailOfAuthor = "admin";
 
+    @Column(nullable = false, unique = false, columnDefinition = "BIT")
+    private Byte privateArticle = 1;
+
     public String getAuthor(){
         return emailOfAuthor;
     }
 
     public void setEmailOfAuthor(String string){
         this.emailOfAuthor = string;
+    }
+
+    public void setPrivate(Byte bo){
+        this.privateArticle = bo;
     }
 
 

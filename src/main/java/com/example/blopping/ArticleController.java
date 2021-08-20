@@ -88,7 +88,10 @@ public class ArticleController{
     public String updatearticle(@AuthenticationPrincipal CustomUserDetails userPrincipal, Article article, Model model){
         String articleId = article.getId().toString();
         String articleText = article.getArticleText();
-        String authorOfArticle = userPrincipal.getUsername();
+        String authorOfArticle = article.getAuthor();
+        Byte privateTrigger = article.getPrivateArticle();
+
+        System.out.println(privateTrigger);
 
         String[] articleTextAsString = articleText.split(" ");
         //System.out.println(Arrays.toString(articleTextAsString));
@@ -115,17 +118,20 @@ public class ArticleController{
 
         EntityManager session = entityManagerFactory.createEntityManager();
 
-        session.createNativeQuery("UPDATE artiklar SET article_text=:articleText email_of_author=:authorOfArticle WHERE id=:articleId")
+        session.createNativeQuery("UPDATE artiklar SET article_text=:articleText email_of_author=:authorOfArticle private_article=:privateTrigger WHERE id=:articleId")
                 .setParameter("articleText", articleTextFinal)
                 .setParameter("authorOfArticle", authorOfArticle)
+                .setParameter("privateTrigger", privateTrigger)
                 .setParameter("articleId", articleId);
 
         article.setArticleText(articleTextFinal);
         article.setEmailOfAuthor(authorOfArticle);
+        article.setPrivate(privateTrigger);
 
         System.out.println(article.getAuthor());
         articleRepo.save(article);
 
+        System.out.println(model);
 
         return listAllArticles(model);
     }
