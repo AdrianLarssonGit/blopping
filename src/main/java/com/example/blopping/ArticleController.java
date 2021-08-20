@@ -85,12 +85,13 @@ public class ArticleController{
     }
 
     @PostMapping("/updatearticle")
-    public String updatearticle(Article article, Model model){
+    public String updatearticle(@AuthenticationPrincipal CustomUserDetails userPrincipal, Article article, Model model){
         String articleId = article.getId().toString();
         String articleText = article.getArticleText();
+        String authorOfArticle = userPrincipal.getUsername();
 
         String[] articleTextAsString = articleText.split(" ");
-        System.out.println(Arrays.toString(articleTextAsString));
+        //System.out.println(Arrays.toString(articleTextAsString));
 
         for(int i = 0; i < articleTextAsString.length; i++){
             if(articleTextAsString[i].startsWith("TITLE::")){
@@ -98,7 +99,7 @@ public class ArticleController{
             }
         }
 
-        System.out.println(Arrays.toString(articleTextAsString));
+        //System.out.println(Arrays.toString(articleTextAsString));
 
         String articleTextFinal = "";
 
@@ -108,21 +109,45 @@ public class ArticleController{
 
         articleTextFinal = articleTextFinal.substring(0,articleTextFinal.length()-1);
 
-        System.out.println(articleTextFinal);
+        //System.out.println(articleTextFinal);
 
 
 
         EntityManager session = entityManagerFactory.createEntityManager();
 
-        session.createNativeQuery("UPDATE artiklar SET article_text=:articleText WHERE id=:articleId")
+        session.createNativeQuery("UPDATE artiklar SET article_text=:articleText email_of_author=:authorOfArticle WHERE id=:articleId")
                 .setParameter("articleText", articleTextFinal)
+                .setParameter("authorOfArticle", authorOfArticle)
                 .setParameter("articleId", articleId);
 
         article.setArticleText(articleTextFinal);
+        article.setEmailOfAuthor(authorOfArticle);
+
+        System.out.println(article.getAuthor());
         articleRepo.save(article);
 
 
         return listAllArticles(model);
+    }
+
+    @GetMapping("/minaartiklar")
+    public String minaArtiklar(@AuthenticationPrincipal CustomUserDetails userPrincipal, Model model){
+        List<Article> mainArticleList = articleRepo.findAll();
+        List<Article> finalList = new ArrayList<>();
+
+        for(int i = 0; i < mainArticleList.size(); i++){
+            if(mainArticleList.get(i).getAuthor().equals(userPrincipal.getUsername())){
+                model.addAttribute("article", mainArticleList.get(i));
+            }
+        }
+
+        System.out.println(model);
+
+        //model.addAttribute("article", finalList.get(0));
+
+        return "myarticles";
+
+
     }
 
 }

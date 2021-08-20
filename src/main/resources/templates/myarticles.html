@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Ändra artikel </title>
+
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+  <form th:action="@{/logout}" method="post">
+    <p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+    <button type="submit">Logout</button></form>
+
+  <table class="centered" border="1">
+    <tr th:each="article: ${article}">
+      <td class="article-text" style="overflow-x: hidden" th:utext="${article.articleText}"/>
+      <td type="hidden" th:field="${article.id}"/>
+      <td><form th:action="@{/editarticle/{articleId}(articleId=${article.getId()})}" method="get"><button type="submit">Ändra</button></form></td>
+    </tr>
+  </table>
+
+
+
+</div>
+
+
+</body>
+</html>

@@ -15,6 +15,10 @@
     <h3><a th:href="@{/login}">Logga in (för att ändra/lägga till artiklar)</a></h3>
     </div>
 
+    <div sec:authorize="isAuthenticated()">
+        <h3><a th:href="@{/minaartiklar}">Se mina artiklar</a></h3>
+    </div>
+
 
 </body>
 </html>

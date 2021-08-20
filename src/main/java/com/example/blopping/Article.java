@@ -21,7 +21,15 @@ public class Article {
     private String articleText;
 
     @Column(nullable = false, unique = true, columnDefinition = "LONGTEXT")
-    private String emailOfAuthor = "admin@google.se";
+    private String emailOfAuthor = "admin";
+
+    public String getAuthor(){
+        return emailOfAuthor;
+    }
+
+    public void setEmailOfAuthor(String string){
+        this.emailOfAuthor = string;
+    }
 
 
 }
