@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,9 +8,11 @@
 </head>
 <body>
 <form th:action="@{/sparaartikel}" th:objet="${article}" method="post">
-  <label>Email:</label>
+  <label>Skriv in artikel:</label>
   <input type="text" th:field="${article.articleText}"/>
   <br>
+
+  <!-- <span sec:authentication="principal.username">Fullname</span> -->
 
   <button type="submit">Skapa artikel</button>
 </form>

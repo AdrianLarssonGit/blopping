@@ -20,5 +20,8 @@ public class Article {
     @Column(nullable = true, unique = false, columnDefinition = "LONGTEXT")
     private String articleText;
 
+    @Column(nullable = false, unique = true, columnDefinition = "LONGTEXT")
+    private String emailOfAuthor = "admin@google.se";
+
 
 }

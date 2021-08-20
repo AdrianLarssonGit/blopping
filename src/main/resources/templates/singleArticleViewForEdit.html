@@ -15,7 +15,7 @@
 
     <!-- <input type="text" th:field="${article.articleText}"/> -->
     <textarea class="form-control" rows="12"
-              style="margin-top: 10px;"
+              style="margin-top: 10px; white-space: pre-wrap;"
                th:field="${article.articleText}">[[${article.articleText}]]</textarea>
     <br>
     <input type="hidden" th:field="${article.id}"/>

@@ -3,6 +3,9 @@ package com.example.blopping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
+import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +27,9 @@ public class ArticleController{
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Autowired
@@ -47,7 +54,8 @@ public class ArticleController{
 
     //Saved newly created article and returns home view
     @PostMapping("/sparaartikel")
-    public String saveArticleToRepoAndRedirect(Article article){
+    public String saveArticleToRepoAndRedirect(@AuthenticationPrincipal CustomUserDetails userPrincipal, Article article){
+        article.setEmailOfAuthor(userPrincipal.getUsername());
         articleRepo.save(article);
 
         return "home";

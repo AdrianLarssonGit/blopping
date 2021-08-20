@@ -12,6 +12,8 @@
 <div sec:authorize="isAuthenticated()">
     <form th:action="@{/logout}" method="post">
         <p>Hej, <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+        <br><br>
+
         <button type="submit">Logout</button></form>
 
 <table class="centered" border="1">
