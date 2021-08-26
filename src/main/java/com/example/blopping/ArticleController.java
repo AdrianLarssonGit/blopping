@@ -89,12 +89,15 @@ public class ArticleController{
         String articleId = article.getId().toString();
         String articleText = article.getArticleText();
         String authorOfArticle = article.getAuthor();
-        Byte privateTrigger = article.getPrivateArticle();
+        byte finalPrivateTrigger = article.getPrivateArticle();
 
-        System.out.println(privateTrigger);
+
+        System.out.println(model);
+
+
 
         String[] articleTextAsString = articleText.split(" ");
-        //System.out.println(Arrays.toString(articleTextAsString));
+
 
         for(int i = 0; i < articleTextAsString.length; i++){
             if(articleTextAsString[i].startsWith("TITLE::")){
@@ -102,7 +105,7 @@ public class ArticleController{
             }
         }
 
-        //System.out.println(Arrays.toString(articleTextAsString));
+
 
         String articleTextFinal = "";
 
@@ -112,26 +115,28 @@ public class ArticleController{
 
         articleTextFinal = articleTextFinal.substring(0,articleTextFinal.length()-1);
 
-        //System.out.println(articleTextFinal);
+
 
 
 
         EntityManager session = entityManagerFactory.createEntityManager();
 
-        session.createNativeQuery("UPDATE artiklar SET article_text=:articleText email_of_author=:authorOfArticle private_article=:privateTrigger WHERE id=:articleId")
+ /*       session.createNativeQuery("UPDATE artiklar SET article_text=:articleText email_of_author=:authorOfArticle private_article=:finalPrivateTrigger WHERE id=:articleId")
                 .setParameter("articleText", articleTextFinal)
                 .setParameter("authorOfArticle", authorOfArticle)
-                .setParameter("privateTrigger", privateTrigger)
-                .setParameter("articleId", articleId);
+                .setParameter("finalPrivateTrigger", 0) //cast top byte??
+                .setParameter("articleId", articleId);*/
 
         article.setArticleText(articleTextFinal);
         article.setEmailOfAuthor(authorOfArticle);
-        article.setPrivate(privateTrigger);
+        article.setPrivate(finalPrivateTrigger);
 
         System.out.println(article.getAuthor());
+        System.out.println("this is how it came in : " + finalPrivateTrigger);
+        System.out.println(article.getPrivateArticle());
         articleRepo.save(article);
 
-        System.out.println(model);
+        //System.out.println(model);
 
         return listAllArticles(model);
     }

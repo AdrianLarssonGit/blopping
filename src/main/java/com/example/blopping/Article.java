@@ -23,7 +23,7 @@ public class Article {
     @Column(nullable = false, unique = true, columnDefinition = "LONGTEXT")
     private String emailOfAuthor = "admin";
 
-    @Column(nullable = false, unique = false, columnDefinition = "BIT")
+    @Column(nullable = false, unique = true, columnDefinition = "BIT")
     private Byte privateArticle = 1;
 
     public String getAuthor(){
@@ -36,6 +36,10 @@ public class Article {
 
     public void setPrivate(Byte bo){
         this.privateArticle = bo;
+    }
+
+    public Byte getPrivateArticle(){
+        return this.privateArticle;
     }
 
 
