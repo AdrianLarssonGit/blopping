@@ -129,7 +129,8 @@ public class ArticleController{
 
         article.setArticleText(articleTextFinal);
         article.setEmailOfAuthor(authorOfArticle);
-        article.setPrivate(finalPrivateTrigger);
+        article.setPrivate((byte) 0); //<-- make this keep state from before user decided to edit article
+        //Problem is most likely in row 23 of singleAericleViewForEdit.html, probably
 
         System.out.println(article.getAuthor());
         System.out.println("this is how it came in : " + finalPrivateTrigger);
