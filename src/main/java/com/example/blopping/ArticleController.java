@@ -91,11 +91,6 @@ public class ArticleController{
         String authorOfArticle = article.getAuthor();
         byte finalPrivateTrigger = article.getPrivateArticle();
 
-
-        System.out.println(model);
-
-
-
         String[] articleTextAsString = articleText.split(" ");
 
 
@@ -119,7 +114,7 @@ public class ArticleController{
 
 
 
-        EntityManager session = entityManagerFactory.createEntityManager();
+      //  EntityManager session = entityManagerFactory.createEntityManager();
 
  /*       session.createNativeQuery("UPDATE artiklar SET article_text=:articleText email_of_author=:authorOfArticle private_article=:finalPrivateTrigger WHERE id=:articleId")
                 .setParameter("articleText", articleTextFinal)
@@ -129,15 +124,10 @@ public class ArticleController{
 
         article.setArticleText(articleTextFinal);
         article.setEmailOfAuthor(authorOfArticle);
-        article.setPrivate((byte) 0); //<-- make this keep state from before user decided to edit article
-        //Problem is most likely in row 23 of singleAericleViewForEdit.html, probably
+        article.setPrivate(finalPrivateTrigger);
 
-        System.out.println(article.getAuthor());
-        System.out.println("this is how it came in : " + finalPrivateTrigger);
-        System.out.println(article.getPrivateArticle());
         articleRepo.save(article);
 
-        //System.out.println(model);
 
         return listAllArticles(model);
     }
