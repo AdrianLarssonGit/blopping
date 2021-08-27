@@ -89,7 +89,13 @@ public class ArticleController{
         String articleId = article.getId().toString();
         String articleText = article.getArticleText();
         String authorOfArticle = article.getAuthor();
-        byte finalPrivateTrigger = article.getPrivateArticle();
+        byte finalPrivateTrigger = Byte.valueOf(article.trashField);
+        System.out.println("This sucks: " + article.trashField);
+
+
+        System.out.println(article.toString());
+
+        System.out.println(model);
 
         String[] articleTextAsString = articleText.split(" ");
 

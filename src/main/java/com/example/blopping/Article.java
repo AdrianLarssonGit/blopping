@@ -24,7 +24,9 @@ public class Article {
     private String emailOfAuthor = "admin";
 
     @Column(nullable = false, unique = true, columnDefinition = "BIT")
-    private Byte privateArticle = 1;
+    private Byte privateArticle = 0;
+
+    public String trashField = privateArticle.toString();
 
     public String getAuthor(){
         return emailOfAuthor;

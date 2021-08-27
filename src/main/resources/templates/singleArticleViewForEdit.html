@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
   <title>Ändra artikel </title>
@@ -21,10 +21,22 @@
     <input type="hidden" th:field="${article.id}"/>
     <input type="hidden" th:field="${article.emailOfAuthor}">
     <input type="hidden" th:field="${article.privateArticle}">
+
+    <h3><tr th:if="${article.getAuthor} == ${#authentication.principal.getUsername}">You are the author of this article
+
+
+      <h3><p>Privacy settings:</p></h3>
+      <input type="radio" th:name="${article.privateArticle}" value=1 th:field="${article.trashField}">Private</input>
+
+      <input type="radio" th:name="${article.privateArticle}" value=0 th:field="${article.trashField}">Public</input>
+      </tr></h3>
+    <br>
     <button type="submit">Spara artikel</button>
   </form>
 
 
+
+  <h3><tr th:if="${article.getAuthor} != ${#authentication.principal.getUsername}">You are not the author of this article</tr></h3>
 
 </div>
 
