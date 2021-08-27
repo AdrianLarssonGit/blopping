@@ -26,9 +26,9 @@
 
 
       <h3><p>Privacy settings:</p></h3>
-      <input type="radio" th:name="${article.privateArticle}" value=1 th:field="${article.trashField}">Private</input>
+      <input type="radio" th:name="${article.privateArticle}" value=1 th:field="${article.tempPrivateArticleField}">Private</input>
 
-      <input type="radio" th:name="${article.privateArticle}" value=0 th:field="${article.trashField}">Public</input>
+      <input type="radio" th:name="${article.privateArticle}" value=0 th:field="${article.tempPrivateArticleField}">Public</input>
       </tr></h3>
     <br>
     <button type="submit">Spara artikel</button>

@@ -26,7 +26,7 @@ public class Article {
     @Column(nullable = false, unique = true, columnDefinition = "BIT")
     private Byte privateArticle = 0;
 
-    public String trashField = privateArticle.toString();
+    public String tempPrivateArticleField = privateArticle.toString();
 
     public String getAuthor(){
         return emailOfAuthor;

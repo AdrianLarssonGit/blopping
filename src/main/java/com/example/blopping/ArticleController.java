@@ -1,26 +1,16 @@
 package com.example.blopping;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.http.HttpServletRequest;
-import javax.sql.DataSource;
-import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ArticleController{
@@ -89,13 +79,8 @@ public class ArticleController{
         String articleId = article.getId().toString();
         String articleText = article.getArticleText();
         String authorOfArticle = article.getAuthor();
-        byte finalPrivateTrigger = Byte.valueOf(article.trashField);
-        System.out.println("This sucks: " + article.trashField);
+        byte finalPrivateTrigger = Byte.valueOf(article.tempPrivateArticleField);
 
-
-        System.out.println(article.toString());
-
-        System.out.println(model);
 
         String[] articleTextAsString = articleText.split(" ");
 
